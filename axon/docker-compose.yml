@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  axonserver:
+    image: axoniq/axonserver
+    volumes:
+      - axonserver-config:/config:ro
+volumes:
+  axonserver-config:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/config
+      o: bind
