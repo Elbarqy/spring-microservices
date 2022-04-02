@@ -1,6 +1,6 @@
-package com.elbarqy.appstore.product.service.query;
+package com.elbarqy.appstore.product.service.command;
 
-import com.elbarqy.appstore.product.service.core.data.ProductEntity;
+import com.elbarqy.appstore.product.service.core.data.models.ProductEntity;
 import com.elbarqy.appstore.product.service.core.data.ProductRepository;
 import com.elbarqy.appstore.product.service.core.events.ProductCreatedEvent;
 import org.axonframework.eventhandling.EventHandler;
@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProductProjection {
+public class ProductEventHandler {
     private final ProductRepository productRepository;
 
     @Autowired
-    public ProductProjection(ProductRepository productRepository) {
+    public ProductEventHandler(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 

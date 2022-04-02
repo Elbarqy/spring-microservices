@@ -1,4 +1,4 @@
-package com.elbarqy.appstore.product.service.command;
+package com.elbarqy.appstore.product.service.command.models;
 
 import lombok.Builder;
 import lombok.Data;

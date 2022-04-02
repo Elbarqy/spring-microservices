@@ -1,5 +1,6 @@
 package com.elbarqy.appstore.product.service.core.data;
 
+import com.elbarqy.appstore.product.service.core.data.models.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

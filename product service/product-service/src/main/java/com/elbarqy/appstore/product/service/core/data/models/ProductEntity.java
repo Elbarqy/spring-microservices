@@ -1,4 +1,4 @@
-package com.elbarqy.appstore.product.service.core.data;
+package com.elbarqy.appstore.product.service.core.data.models;
 
 import lombok.Data;
 

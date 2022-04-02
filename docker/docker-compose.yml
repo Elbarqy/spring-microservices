@@ -1,0 +1,36 @@
+version: '3.3'
+services:
+  axonserver:
+    image: axoniq/axonserver
+    volumes:
+      - axonserver-config:/config:ro
+    ports:
+      - '8024:8024'
+      - '8124:8124'
+      - '8224:8224'
+  # h2:
+  #   image: oscarfonts/h2
+  #   ports:
+  #     - 81:81
+  #     - 1521:1521
+  #   environment:
+  #     - name=H2Instance
+  #   volumes:
+  #     - ./h2:/opt/h2-data
+  # postgres:
+  #   image: postgres
+  #   environment:
+  #     - POSTGRES_PASSWORD: root
+  #     - POSTGRES_USER: root
+  #     - POSTGRES_DB: productDB
+  #   volumes:
+  #     - ./pgdata:/var/lib/postgresql/data
+  #   ports:
+  #     - '5432:5432'
+volumes:
+  axonserver-config:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/config
+      o: bind

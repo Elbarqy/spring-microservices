@@ -1,5 +1,6 @@
 package com.elbarqy.appstore.product.service.command;
 
+import com.elbarqy.appstore.product.service.command.models.CreateProductCommand;
 import com.elbarqy.appstore.product.service.core.events.ProductCreatedEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;

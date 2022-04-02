@@ -1,27 +1,29 @@
-package com.elbarqy.appstore.product.service.rest;
+package com.elbarqy.appstore.product.service.command.rest;
 
-import com.elbarqy.appstore.product.service.command.CreateProductCommand;
+import com.elbarqy.appstore.product.service.command.models.CreateProductCommand;
+import com.elbarqy.appstore.product.service.command.models.CreateProductRestModel;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/products") //http://localhost:8080/products
-public class ProductController {
+@RequestMapping("/products")
+public class ProductCommandController {
     private final Environment env;
     private final CommandGateway commandGateway;
 
     @Autowired
-    public ProductController(Environment env, CommandGateway commandGateway) {
+    public ProductCommandController(Environment env, CommandGateway commandGateway) {
         this.env = env;
         this.commandGateway = commandGateway;
     }
 
     @PostMapping
-    public String createProduct(@RequestBody CreateProductRestModel createProductRestModel) {
+    public String createProduct(@Valid @RequestBody CreateProductRestModel createProductRestModel) {
         CreateProductCommand createProductCommand = CreateProductCommand.builder()
                 .price(createProductRestModel.getPrice())
                 .title(createProductRestModel.getTitle())
@@ -34,10 +36,5 @@ public class ProductController {
             returnedValue = ex.getLocalizedMessage();
         }
         return returnedValue;
-    }
-
-    @GetMapping
-    public String getProduct() {
-        return "HTTP GET handle String";
     }
 }
