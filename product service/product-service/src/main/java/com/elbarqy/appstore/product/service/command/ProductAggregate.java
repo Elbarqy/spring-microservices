@@ -26,13 +26,6 @@ public class ProductAggregate {
     @CommandHandler
     public ProductAggregate(CreateProductCommand createProductCommand) {
         //Validation
-        if (createProductCommand.getPrice().compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("Price has to be less than or equal zero");
-        }
-        if (createProductCommand.getTitle() == null ||
-                createProductCommand.getTitle().isBlank()) {
-            throw new IllegalArgumentException("Title is a required field");
-        }
         ProductCreatedEvent productCreatedEvent = new ProductCreatedEvent();
         BeanUtils.copyProperties(createProductCommand, productCreatedEvent);
         AggregateLifecycle.apply(productCreatedEvent);
