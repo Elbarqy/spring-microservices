@@ -12,19 +12,22 @@ import org.springframework.beans.BeanUtils;
 import java.math.BigDecimal;
 
 @Aggregate
-public class ProductAggregate {
+public class ProductCommandHandler {
+    //Simply an aggregate that holds the state of the command
+    //Materialize an event object
+    //Aggregate that event object to axon
     @AggregateIdentifier
     private String productID;
     private String title;
     private BigDecimal price;
     private Integer quantity;
 
-    public ProductAggregate() {
+    public ProductCommandHandler() {
 
     }
 
     @CommandHandler
-    public ProductAggregate(CreateProductCommand createProductCommand) {
+    public ProductCommandHandler(CreateProductCommand createProductCommand) {
         //Validation
         ProductCreatedEvent productCreatedEvent = new ProductCreatedEvent();
         BeanUtils.copyProperties(createProductCommand, productCreatedEvent);
