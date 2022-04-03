@@ -1,5 +1,6 @@
 package com.elbarqy.appstore.product.service.command;
 
+import com.elbarqy.appstore.core.events.ProductReservedEvent;
 import com.elbarqy.appstore.product.service.core.data.models.ProductEntity;
 import com.elbarqy.appstore.product.service.core.data.ProductRepository;
 import com.elbarqy.appstore.product.service.core.events.ProductCreatedEvent;
@@ -21,7 +22,7 @@ public class ProductEventHandler {
     }
 
     @ExceptionHandler(resultType = Exception.class)
-    public void handle(Exception exception) throws Exception{
+    public void handle(Exception exception) throws Exception {
         throw exception;
     }
 
@@ -29,6 +30,17 @@ public class ProductEventHandler {
     public void on(ProductCreatedEvent event) {
         ProductEntity productEntity = new ProductEntity();
         BeanUtils.copyProperties(event, productEntity);
+        try {
+            productRepository.save(productEntity);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @EventHandler
+    public void on(ProductReservedEvent event) {
+        ProductEntity productEntity = productRepository.findByProductID(event.getProductID());
+        productEntity.setQuantity(productEntity.getQuantity() - event.getQuantity());
         productRepository.save(productEntity);
     }
 }
