@@ -58,3 +58,24 @@ The class is decorated with `@ProcessingGroup("product-group")` to hold the even
 > Created a query intent class pushed it into the query gateway
 > which the ProductQueryHandler received and returned the fetched 
 > products from the database
+
+
+# Error handling
+### Three ways to go about this
+- `ControllerAdvice` to get all exceptions to a certain class
+- `EventExceptionHandler` from the interceptor class in the same file
+- `ListienerInvocationErrorHandler` propagate the error from the event handler to the controller
+```
+    @Autowired
+    public void configure(EventProcessingConfigurer config) {
+```
+```
+        config.registerListenerInvocationErrorHandler("product-group",
+                conf -> new ProductServiceEventErrorHandling());
+```
+or use this to propagate the error from the event handler to controller
+```
+        config.registerListenerInvocationErrorHandler("product-group",
+                conf -> PropagatingErrorHandler.instance());
+    }
+```

@@ -30,11 +30,12 @@ public class ProductCommandController {
                 .quantity(createProductRestModel.getQuantity())
                 .productID(UUID.randomUUID().toString()).build();
         String returnedValue = null;
-        try {
-            returnedValue = commandGateway.sendAndWait(createProductCommand);
-        } catch (Exception ex) {
-            returnedValue = ex.getLocalizedMessage();
-        }
+        returnedValue = commandGateway.sendAndWait(createProductCommand);
+//        try {
+//            returnedValue = commandGateway.sendAndWait(createProductCommand);
+//        } catch (Exception ex) {
+//            returnedValue = ex.getLocalizedMessage();
+//        }
         return returnedValue;
     }
 }

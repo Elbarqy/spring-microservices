@@ -5,6 +5,7 @@ import com.elbarqy.appstore.product.service.core.data.ProductRepository;
 import com.elbarqy.appstore.product.service.core.events.ProductCreatedEvent;
 import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.EventHandler;
+import org.axonframework.messaging.interceptors.ExceptionHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,11 @@ public class ProductEventHandler {
     @Autowired
     public ProductEventHandler(ProductRepository productRepository) {
         this.productRepository = productRepository;
+    }
+
+    @ExceptionHandler(resultType = Exception.class)
+    public void handle(Exception exception) throws Exception{
+        throw exception;
     }
 
     @EventHandler
