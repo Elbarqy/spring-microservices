@@ -2,6 +2,7 @@ package com.elbarqy.appstore.orderservice.command.rest;
 
 import com.elbarqy.appstore.orderservice.command.models.CreateOrderCommand;
 import com.elbarqy.appstore.orderservice.command.models.CreateOrderRest;
+import com.elbarqy.appstore.orderservice.command.models.OrderStatus;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +25,11 @@ public class OrderCommandController {
                 .userID("27b95829-4f3f-4ddf-8983-151ba010e35b")
                 .orderID(UUID.randomUUID().toString())
                 .addressID(createOrderRest.getAddressID())
-                .quantity(createOrderRest.getQuantity()).build();
-        return commandGateway.sendAndWait(createOrderCommand);
+                .quantity(createOrderRest.getQuantity())
+                .productID(createOrderRest.getProductID())
+                .orderStatus(OrderStatus.CREATED)
+                .build();
+        String returnedValue = commandGateway.sendAndWait(createOrderCommand);
+        return returnedValue;
     }
 }
