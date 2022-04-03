@@ -2,15 +2,16 @@ package com.elbarqy.appstore.product.service.core.data.models;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "products")
+@Table(name = "products"
+//        uniqueConstraints = {
+//                @UniqueConstraint(name = "UniqueXAndY", columnNames = {"X", "Y"}),
+//        }
+)
 @Data
 public class ProductEntity implements Serializable {
     @Id

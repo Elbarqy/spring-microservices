@@ -23,12 +23,10 @@ public class ProductCommandHandler {
     private Integer quantity;
 
     public ProductCommandHandler() {
-
     }
 
     @CommandHandler
     public ProductCommandHandler(CreateProductCommand createProductCommand) {
-        //Validation
         ProductCreatedEvent productCreatedEvent = new ProductCreatedEvent();
         BeanUtils.copyProperties(createProductCommand, productCreatedEvent);
         AggregateLifecycle.apply(productCreatedEvent);
