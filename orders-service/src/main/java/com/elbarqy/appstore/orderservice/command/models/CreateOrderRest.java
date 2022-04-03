@@ -8,9 +8,9 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class CreateOrderRest {
     @NotBlank
-    public String productID;
+    private String productID;
     @Min(value = 1)
-    public int quantity;
+    private int quantity;
     @NotBlank
-    public String addressID;
+    private String addressID;
 }
