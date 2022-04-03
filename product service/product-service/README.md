@@ -8,8 +8,17 @@ This microservice is powered by axon framework for handling event-sourcing withi
 
 This is the general architecture of axon you can find it in the docs of the site
 
-## Overview of how the api works
-### Creating a product
+# Overview of how the api works
+## CQRS implementation
+> `CommandGateway` and `QueryGateway` implementation within axon
+> helps us implement the pattern of cqrs
+### Command
+#### Creating a product
+>Summary: *Issue a command intent -> Create command handler -> 
+> Aggregates the command by productID converts it into event and pushes it to event handler and persist it into the event store
+> -> Create EventHandler -> pushes the record into the main entity*
+> 
+> Note: *An interceptor was created to query the cache before persisting the event* 
 - in order to create a product of `{'title':''product name','price':200,'Quantity':2}`
 
 - We create a command object that is going to be aggregated in a command handler then translated to an event object after the aggregate has been persisted
@@ -44,3 +53,8 @@ All you have to do is limit your schema and add @Valid decoration to your incomi
 ```
 
 The class is decorated with `@ProcessingGroup("product-group")` to hold the event handler withing a processing group that ensures sequential processing of the events and better handling for errors within that group
+
+## Query
+> Created a query intent class pushed it into the query gateway
+> which the ProductQueryHandler received and returned the fetched 
+> products from the database
