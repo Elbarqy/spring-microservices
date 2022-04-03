@@ -21,7 +21,7 @@ public class CreateOrderCommandHandler {
     private String userID;
     private String orderId;
     private String productId;
-    private BigDecimal quantity;
+    private Integer quantity;
     private String addressId;
     private OrderStatus orderStatus;
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderEventHandling.class);

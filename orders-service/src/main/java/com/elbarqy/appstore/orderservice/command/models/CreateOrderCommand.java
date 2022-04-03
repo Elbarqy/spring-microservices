@@ -13,7 +13,7 @@ public class CreateOrderCommand {
     private final String userID;
     public final String orderID;
     private final String productID;
-    private final BigDecimal quantity;
+    private final Integer quantity;
     private final String addressID;
     private final OrderStatus orderStatus;
 }

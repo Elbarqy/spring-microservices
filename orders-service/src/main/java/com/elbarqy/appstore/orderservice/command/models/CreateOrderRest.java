@@ -11,7 +11,7 @@ public class CreateOrderRest {
     @NotBlank
     private String productID;
     @Min(value = 1)
-    private BigDecimal quantity;
+    private Integer quantity;
     @NotBlank
     private String addressID;
 }

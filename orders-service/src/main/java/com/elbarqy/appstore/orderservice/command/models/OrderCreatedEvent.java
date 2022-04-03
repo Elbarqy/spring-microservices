@@ -9,7 +9,7 @@ public class OrderCreatedEvent {
     private String userID;
     public String orderID;
     private String productID;
-    private BigDecimal quantity;
+    private Integer quantity;
     private String addressID;
     private OrderStatus orderStatus;
 }
