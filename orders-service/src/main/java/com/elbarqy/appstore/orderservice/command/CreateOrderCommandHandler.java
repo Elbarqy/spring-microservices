@@ -17,8 +17,8 @@ import java.math.BigDecimal;
 
 @Aggregate
 public class CreateOrderCommandHandler {
-    @AggregateIdentifier
     private String userID;
+    @AggregateIdentifier
     private String orderId;
     private String productId;
     private Integer quantity;
@@ -30,15 +30,16 @@ public class CreateOrderCommandHandler {
     }
 
     @CommandHandler
-    public  CreateOrderCommandHandler(CreateOrderCommand createOrderCommand) {
+    public CreateOrderCommandHandler(CreateOrderCommand createOrderCommand) {
         OrderCreatedEvent orderCreatedEvent = new OrderCreatedEvent();
         BeanUtils.copyProperties(createOrderCommand, orderCreatedEvent);
-        LOGGER.info(orderCreatedEvent.toString());
+        LOGGER.info("+ Command Handler" + orderCreatedEvent.toString());
         AggregateLifecycle.apply(orderCreatedEvent);
     }
 
     @EventSourcingHandler
     public void on(OrderCreatedEvent event) {
+        LOGGER.info("+ OrderCreatedEvent Has been event sourced");
         this.userID = event.getUserID();
         this.productId = event.getProductID();
         this.orderId = event.getOrderID();

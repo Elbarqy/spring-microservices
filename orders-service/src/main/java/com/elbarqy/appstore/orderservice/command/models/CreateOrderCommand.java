@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 @Data
 @Builder
 public class CreateOrderCommand {
-    @TargetAggregateIdentifier
     private final String userID;
+    @TargetAggregateIdentifier
     public final String orderID;
     private final String productID;
     private final Integer quantity;

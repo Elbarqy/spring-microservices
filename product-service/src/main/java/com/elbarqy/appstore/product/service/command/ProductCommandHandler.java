@@ -40,8 +40,9 @@ public class ProductCommandHandler {
     }
 
     @CommandHandler
-    public void handler(ReserveProductCommand reserveProductCommand) {
-        LOGGER.info(this.productID + " " + this.quantity + " " + reserveProductCommand);
+    public void handle(ReserveProductCommand reserveProductCommand) {
+        LOGGER.info("+ ProductCommandHandler "
+                + this.productID + " " + this.quantity + " " + reserveProductCommand);
         if (this.quantity < reserveProductCommand.getQuantity()) {
             throw new IllegalArgumentException("Insufficient number of items in stock");
         }
@@ -64,6 +65,8 @@ public class ProductCommandHandler {
 
     @EventSourcingHandler
     public void on(ProductReservedEvent productReservedEvent) {
+        LOGGER.info("+ ProductReservedEvent Sourcing "
+                + this.productID + " " + this.quantity + " " + productReservedEvent);
         this.quantity -= productReservedEvent.getQuantity();
     }
 }

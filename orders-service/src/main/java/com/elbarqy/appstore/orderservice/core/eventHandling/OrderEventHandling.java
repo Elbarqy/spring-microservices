@@ -24,9 +24,9 @@ public class OrderEventHandling {
 
     @EventHandler
     public void on(OrderCreatedEvent event) {
-        LOGGER.info("Started the entity to the table " + event.toString());
         OrderEntity orderEntity = new OrderEntity();
         BeanUtils.copyProperties(event, orderEntity);
+        LOGGER.info("+ Event Handled ");
         orderRepository.save(orderEntity);
     }
 }

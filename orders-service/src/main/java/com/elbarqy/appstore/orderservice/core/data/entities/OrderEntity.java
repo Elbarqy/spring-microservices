@@ -15,7 +15,7 @@ public class OrderEntity {
     private String orderID;
     private String userID;
     private String productID;
-    private BigDecimal quantity;
+    private Integer quantity;
     private String addressID;
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
